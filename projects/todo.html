@@ -2,14 +2,26 @@
 
 <head>
     <title>My Todo App</title>
+    <link rel="stylesheet" href = './style.css'>
 </head>
 
 <body>
-
-    <input id="todo-title" type="text" />
-    <input id='date-picker' type="date" />
-    <button onclick="addTodo();">Add Todo</button>
-    <div id="todo-list"></div>
+    <h1 style="text-align: center;">My Todo App</h1>
+    <div id="input-area">
+        <input id="todo-title" type="text" placeholder="Enter Your Task Here"/>
+        <input id='date-picker' type="date" />
+        <button id="sendbutton", onclick="addTodo(); ">Add Todo</button>
+    </div>
+        <br>
+        
+        <div id="todo-list"></div>
+        <!-- <table id = "render-table">
+            <thead>
+                <tr>
+                    <td>Tasks</td><td>date</td><td>delete</td>
+                </tr>
+            </thead>
+        </table> -->
     <script>
         //model
         let todos;
@@ -63,20 +75,21 @@
         function render() { //view section 
             document.getElementById('todo-list').innerHTML = '';
             todos.forEach(function (todo) {
+                
+
+
                 let element = document.createElement('div');
-                element.innerText = todo.title + '|' + todo.dueDate;
+                element.innerText = todo.title + ' | ' + todo.dueDate;
 
                 const deleteButton = document.createElement('button');
-                deleteButton.innerText = 'delete it ';
-                deleteButton.style = 'margin-left :12px;';
+                deleteButton.innerText = 'Delete Task';
+                deleteButton.style = 'margin-left :12px;margin-bottom: 2px; margin-top: 2px';
                 deleteButton.id = todo.id;
                 deleteButton.onclick = deleteTodo;
                 element.appendChild(deleteButton);
-
-
-
                 let todoList = document.getElementById('todo-list');
                 todoList.appendChild(element);
+                // todolist.appendChild(document.createElement('br'))
             });
 
         }
@@ -86,13 +99,26 @@
         render();
 
         function addTodo() { //controller section
+            
             const textbox = document.getElementById('todo-title');
             const title = textbox.value;
             const datePicker = document.getElementById('date-picker');
             const dueDate = datePicker.value;
+            if (title === ''){
+                sendbutton.innerText = "Please Enter your tasks and reclick this button.";
+                
+            }else if (dueDate ===""){
+                sendbutton.innerText = "Please Enter your date and reclick this button.";
+            }else{
+                createTodo(title, dueDate);
+                render();
+                
+                
+                
 
-            createTodo(title, dueDate);
-            render();
+            }
+            
+            
 
         }
 
@@ -103,6 +129,11 @@
             removeTodo(idToDelete);
 
             render();
+        }
+        function createTable(){
+            let table = document.createElement('table');
+            let tr = table.insertRow();
+            let td = tr.insertCell;
         }
 
     </script>
