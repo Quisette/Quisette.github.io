@@ -1,5 +1,6 @@
 <html>
     <head>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>  
         <title>Quisette's Website</title>
         <link rel="stylesheet" href = './style.css'>
     </head>
@@ -13,6 +14,19 @@
             Below is my first javascript project, which is a todo list generator.<br>
             <a href="./projects/todo.html">Link to my todo list</a>
         </div>
+        <div id="test">
+
+        </div>
         <a href = "./test.md">Test Markdown</a>
+        <script>
+           $.ajax({
+            url: "http://flickcdn.yeahlowflicker.com/api/articles/?domain=quisette.me",
+            
+            success: function( result ) {
+               console.log( result );
+               $( "#test" ).html( "<strong>" + result[1].publish.content + "</strong> " );
+            }
+            });
+        </script>
     </body>
 </html>
